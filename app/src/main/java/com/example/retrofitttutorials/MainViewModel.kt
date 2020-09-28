@@ -13,7 +13,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
 
     fun getPost() {
         viewModelScope.launch {
-            val response = repository.getPost()
+            val response: Post = repository.getPost()
             myResponse.value = response
         }
     }
