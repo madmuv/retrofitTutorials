@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.retrofitttutorials.repository.Repository
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,10 +21,15 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
         viewModel.getPost()
         viewModel.myResponse.observe(this, Observer { response ->
-            Log.d("Response ", response.userId.toString())
-            Log.d("Response ", response.id.toString())
-            Log.d("Response ", response.title)
-            Log.d("Response ", response.body)
+            if (response.isSuccessful) {
+                Log.d("Response ", response.body()?.userId.toString())
+                Log.d("Response ", response.body()?.id.toString())
+                textView.text = response.body()?.title!!
+                Log.d("Response ", response.body()?.body!!)
+            } else {
+                Log.d("Response", response.errorBody().toString())
+                textView.text = response.code().toString()
+            }
         })
     }
 }
