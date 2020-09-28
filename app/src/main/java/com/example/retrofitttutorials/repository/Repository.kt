@@ -5,6 +5,6 @@ import com.example.retrofitttutorials.model.Post
 
 class Repository {
     suspend fun getPost() : Post {
-        RetrofitInstantce.api.getPost()
+        return RetrofitInstantce.api.getPost()
     }
 }
