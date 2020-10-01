@@ -14,4 +14,7 @@ interface SimpleApi {
     suspend fun getPost2(
         @Path("postNumber") number: Int
     ) : Response<Post>
+
+    @GET("posts")
+    suspend fun getCustomPost(): Response<List<Post>>
 }
