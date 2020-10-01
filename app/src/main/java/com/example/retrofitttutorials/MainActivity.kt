@@ -22,10 +22,14 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val myNumber : String = number_editeText.text.toString()
-            viewModel.getPost2(Integer.parseInt(myNumber ))
-            viewModel.myResponse2.observe(this, Observer { response ->
+            viewModel.getCustomPosts(Integer.parseInt(myNumber))
+            viewModel.myCustomPosts.observe(this, Observer { response ->
                 if (response.isSuccessful) {
                     textView.text = response.body().toString()
+                    response.body()?.forEach {
+                        Log.d("Response ",it.toString())
+                        Log.d("Response ","--------------------------")
+                    }
                 } else {
                     textView.text = response.code().toString()
                 }
